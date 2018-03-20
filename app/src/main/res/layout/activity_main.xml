@@ -12,12 +12,17 @@
         android:id="@+id/iv"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="request"
-        android:text="request"/>
+        android:text="request"
+        android:visibility="gone"/>
 
+    <com.sy.gwb.ui.wedgit.InputView
+        android:layout_width="340dp"
+        android:layout_height="54dp"/>
 </LinearLayout>

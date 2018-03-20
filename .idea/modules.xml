@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Rxjava2Retrofit2Mvp.iml" filepath="$PROJECT_DIR$/Rxjava2Retrofit2Mvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxJava2Retrofit2Mvp.iml" filepath="$PROJECT_DIR$/RxJava2Retrofit2Mvp.iml" />
+      <module fileurl="file://I:\AndroidProject\RxJava2Retrofit2Mvp\RxJava2Retrofit2Mvp\Rxjava2Retrofit2Mvp.iml" filepath="I:\AndroidProject\RxJava2Retrofit2Mvp\RxJava2Retrofit2Mvp\Rxjava2Retrofit2Mvp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://I:\AndroidProject\RxJava2Retrofit2Mvp\RxJava2Retrofit2Mvp\app\app.iml" filepath="I:\AndroidProject\RxJava2Retrofit2Mvp\RxJava2Retrofit2Mvp\app\app.iml" />
     </modules>
   </component>
 </project>
