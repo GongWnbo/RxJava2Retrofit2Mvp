@@ -7,7 +7,9 @@ package com.sy.gwb.net;
 public class Api {
 
     private static ApiService sApiService;
-    private static final String BASE_URL = "http://apis.juhe.cn/mobile/";
+//    private static final String BASE_URL = "http://apis.juhe.cn/mobile/";
+    // 赳赳单车
+    private static final String BASE_URL = "http://139.196.194.172:8083/ElectricBicyclePro/";
 
     public static ApiService getInstance() {
         if (sApiService == null) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="InputView">
+        <!--背景颜色-->
+        <attr name="InputViewBackground" format="color"/>
+        <!--线条粗细-->
+        <attr name="InputViewStrokeWidth" format="integer"/>
+        <!--线条颜色-->
+        <attr name="InputViewStrokeColor" format="color"/>
+        <!--文字颜色-->
+        <attr name="InputViewTextColor" format="color"/>
+        <!--文字大小-->
+        <attr name="InputViewTextSize" format="dimension"/>
+        <!--每个条目的间距-->
+        <attr name="InputViewSpace" format="dimension"/>
+        <!--显示的个数-->
+        <attr name="InputViewCount" format="integer"/>
+        <!--条目的弧度-->
+        <attr name="InputViewItemRadius" format="dimension"/>
+        <!--是否显示弧度-->
+        <attr name="InputViewShowRadius" format="boolean"/>
+    </declare-styleable>
+</resources>

@@ -2,8 +2,10 @@ package com.sy.gwb;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.orhanobut.logger.Logger;
 import com.sy.gwb.entity.BaseResponse;
@@ -51,5 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 });
         System.out.println("测试");
     }
+
 
 }

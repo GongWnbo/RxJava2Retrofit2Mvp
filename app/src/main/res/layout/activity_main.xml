@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    tools:context="com.sy.gwb.network.MainActivity">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iv"
@@ -23,6 +22,10 @@
         android:visibility="gone"/>
 
     <com.sy.gwb.ui.wedgit.InputView
-        android:layout_width="340dp"
-        android:layout_height="54dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        app:InputViewStrokeWidth="4"
+        app:InputViewCount="4"/>
 </LinearLayout>
