@@ -11,15 +11,13 @@
         android:id="@+id/iv"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@mipmap/ic_launcher"
-        android:visibility="gone"/>
+        android:src="@mipmap/ic_launcher"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="request"
-        android:text="request"
-        android:visibility="gone"/>
+        android:text="request"/>
 
     <com.sy.gwb.ui.wedgit.InputView
         android:layout_width="wrap_content"
