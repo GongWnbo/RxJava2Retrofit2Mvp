@@ -4,7 +4,7 @@
         <!--背景颜色-->
         <attr name="InputViewBackground" format="color"/>
         <!--线条粗细-->
-        <attr name="InputViewStrokeWidth" format="integer"/>
+        <attr name="InputViewStrokeWidth" format="dimension"/>
         <!--线条颜色-->
         <attr name="InputViewStrokeColor" format="color"/>
         <!--文字颜色-->

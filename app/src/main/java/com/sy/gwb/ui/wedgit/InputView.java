@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.sy.gwb.R;
 
+
 /**
  * Created by GongWenBo on 2018/3/21.
  */
@@ -25,7 +26,7 @@ public class InputView extends View {
     private Paint mPaint;
     private int count = 9;                // 个数
     private int     background;           // 背景颜色
-    private float   strokeWidth;          // 线条粗细
+//    private float   strokeWidth;          // 线条粗细
     private int     strokeColor;          // 线条颜色
     private int     textColor;            // 字体颜色
     private float   textSize;             // 字体大小
@@ -55,7 +56,8 @@ public class InputView extends View {
     private void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.InputView);
         background = typedArray.getColor(R.styleable.InputView_InputViewBackground, Color.WHITE);
-        strokeWidth = typedArray.getInteger(R.styleable.InputView_InputViewStrokeWidth, 1);
+//        strokeWidth = typedArray.getDimension(R.styleable.InputView_InputViewStrokeWidth, 1);
+//        strokeWidth = dp2px(strokeWidth);
         strokeColor = typedArray.getColor(R.styleable.InputView_InputViewStrokeColor, Color.BLACK);
         textColor = typedArray.getColor(R.styleable.InputView_InputViewTextColor, Color.RED);
         textSize = typedArray.getDimension(R.styleable.InputView_InputViewTextSize, 20);
@@ -75,7 +77,8 @@ public class InputView extends View {
         mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(strokeColor);
-        mPaint.setStrokeWidth(strokeWidth);
+        // TODO: 2018/3/22 0022 此处设置/4是为了让线条看起来细点
+//        mPaint.setStrokeWidth(strokeWidth / 4);
         // 水平居中
         mPaint.setTextAlign(Paint.Align.CENTER);
     }

@@ -19,11 +19,4 @@
         android:onClick="request"
         android:text="request"/>
 
-    <com.sy.gwb.ui.wedgit.InputView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        app:InputViewStrokeWidth="4"
-        app:InputViewCount="4"/>
 </LinearLayout>
