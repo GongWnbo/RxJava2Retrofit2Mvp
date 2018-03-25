@@ -35,6 +35,13 @@ public class PayFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pay, container, false);
         unbinder = ButterKnife.bind(this, view);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String a = bundle.getString("a");
+            String b = bundle.getString("b");
+            Logger.d("PayFragment a=" + a + "\tPayFragment b=" + b);
+
+        }
         return view;
     }
 

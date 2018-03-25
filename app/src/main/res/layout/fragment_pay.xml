@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        app:InputViewCount="6"/>
+        app:InputViewCount="6"
+        app:InputViewStrokeWidth="2"/>
 
     <LinearLayout
         android:layout_width="match_parent"

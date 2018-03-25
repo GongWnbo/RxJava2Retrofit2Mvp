@@ -1,14 +1,15 @@
 package com.sy.gwb.net;
 
 
+import com.orhanobut.logger.Logger;
 import com.sy.gwb.entity.BaseResponse;
 
-import io.reactivex.observers.DisposableObserver;
+import io.reactivex.Observer;
 
 /**
  * Created by ${GongWenbo} on 2018/3/19 0019.
  */
-public abstract class BaseSubscriber<T> extends DisposableObserver<BaseResponse<T>> {
+public abstract class BaseSubscriber<T> implements Observer<BaseResponse<T>> {
     private static final String CODE = "200";
 
     @Override
@@ -16,13 +17,13 @@ public abstract class BaseSubscriber<T> extends DisposableObserver<BaseResponse<
         if (baseResponse.getResultcode().equals(CODE)) {
             onSucceed(baseResponse);
         } else {
-            onFailed(baseResponse);
+            onFailed(new Exception(baseResponse.getReason()),baseResponse.getReason());
         }
     }
 
     @Override
-    public void onError(Throwable t) {
-
+    public void onError(Throwable e) {
+        onFailed(e,RxExceptionUtil.exceptionHandler(e));
     }
 
     @Override
@@ -30,8 +31,8 @@ public abstract class BaseSubscriber<T> extends DisposableObserver<BaseResponse<
 
     }
 
-    public void onFailed(BaseResponse<T> baseResponse) {
-        // TODO: 2018/3/19 0019 失败
+    public void onFailed(Throwable e, String msg) {
+        Logger.d("onFailed e="+e+",msg="+msg);
     }
 
     protected abstract void onSucceed(BaseResponse<T> baseResponse);
