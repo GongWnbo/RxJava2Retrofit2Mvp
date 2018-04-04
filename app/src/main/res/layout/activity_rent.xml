@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.sy.gwb.ui.activity.RentActivity">
 
     <Button
@@ -13,5 +14,11 @@
         android:layout_height="wrap_content"
         android:onClick="rent"
         android:text="Rent"/>
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="测试数据"/>
 
 </LinearLayout>
