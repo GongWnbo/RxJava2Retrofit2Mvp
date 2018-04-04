@@ -13,6 +13,7 @@ import com.sy.gwb.net.ProgressObserver;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -32,6 +33,7 @@ public class RentActivity extends AppCompatActivity {
         String phone = "13858477182";
         Api.getInstance().login(phone, key)
                 .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe(new ProgressObserver<BaseResponse<QueryPhoneBean>>(this) {
