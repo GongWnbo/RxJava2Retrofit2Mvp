@@ -8,20 +8,22 @@ package com.sy.gwb.net;
  */
 
 public class Api {
-
-    private static final String BASE_URL = "http://apis.juhe.cn/mobile/";
+    // 聚合手机号归属地
+    //    private static final String BASE_URL = "http://apis.juhe.cn/mobile/";
+    // 测试不同的json封装
+    private static final String BASE_URL = "http://192.168.0.151:8080";
 
     private Api() {
 
     }
 
-    // 利用静态内部类特性实现外部类的单例
-    private static class ApiInterior {
-        private static ApiService sApiService = new ApiBuilder().getRetrofitBuilder().baseUrl(BASE_URL).build().create(ApiService.class);
-    }
-
     public static ApiService getInstance() {
         return ApiInterior.sApiService;
+    }
+
+    // 利用静态内部类特性实现外部类的单例
+    private static class ApiInterior {
+        private static ApiService sApiService = ApiBuilder.getRetrofitBuilder().baseUrl(BASE_URL).build().create(ApiService.class);
     }
 
 }
