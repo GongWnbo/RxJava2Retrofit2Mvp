@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 // TODO: 2018/3/25 大致实现,功能还要细化 
-public abstract class ProgressObserver<T> extends BaseSubscriber {
+public abstract class ProgressObserver<T> extends BaseSubscriber<T> {
 
     private Context mContext;
     private String  title;

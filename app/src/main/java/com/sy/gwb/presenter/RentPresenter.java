@@ -1,71 +1,64 @@
-package com.sy.gwb.ui.activity;
+package com.sy.gwb.presenter;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
+import android.support.annotation.NonNull;
 
-import com.orhanobut.logger.Logger;
-import com.sy.gwb.R;
 import com.sy.gwb.entity.BaseResponse;
 import com.sy.gwb.entity.QueryPhoneBean;
 import com.sy.gwb.net.Api;
-import com.sy.gwb.net.BaseSubscriber;
 import com.sy.gwb.net.CacheProvider;
 import com.sy.gwb.net.ProgressObserver;
+import com.sy.gwb.ui.activity.RentActivity1;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.io.File;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
 
-public class RentActivity extends AppCompatActivity {
+/**
+ * Created by ${GongWenbo} on 2018/4/12 0012.
+ */
+
+public class RentPresenter implements RentContract.Presenter {
 
     String key = "962af7c970b9fd8f7c487cf9cfa5e1ca";
-    private static final String TAG = "MainActivity";
-    @BindView(R.id.tv_msg)
-    TextView mTvMsg;
-    private CacheProvider mCacheProvider;
+    private RentContract.View mView;
+    private CacheProvider     mCacheProvider;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rent);
-        ButterKnife.bind(this);
+    public RentPresenter(@NonNull RentContract.View view) {
+        mView = view;
     }
 
-    public void rent(View view) {
-        String phone = "13858477182";
+    @Override
+    public void queryPhone(String phone) {
         Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login(phone, key);
         CacheProvider cacheProvider = getCacheProvider();
         cacheProvider.login(login)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new BaseSubscriber<QueryPhoneBean>() {
+                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(((RentActivity1) mView))))
+                .subscribe(new ProgressObserver<QueryPhoneBean>(((RentActivity1) mView)) {
                     @Override
                     protected void onSucceed(BaseResponse<QueryPhoneBean> baseResponse) {
-
+                        mView.showPhoneInfo(baseResponse);
                     }
 
                     @Override
-                    public void onSubscribe(Disposable d) {
-
+                    public void onFailed(Throwable e, String msg) {
+                        super.onFailed(e, msg);
+                        mView.error(msg);
                     }
                 });
     }
 
     public CacheProvider getCacheProvider() {
-        File file = getCacheDir();
+        RentActivity1 view = (RentActivity1) mView;
+        File file = view.getCacheDir();
         if (mCacheProvider == null) {
             mCacheProvider = new RxCache.Builder()
                     .persistence(file, new GsonSpeaker()).using(CacheProvider.class);

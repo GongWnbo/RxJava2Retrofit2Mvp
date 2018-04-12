@@ -9,9 +9,7 @@ package com.sy.gwb.net;
 
 public class Api {
     // 聚合手机号归属地
-    //    private static final String BASE_URL = "http://apis.juhe.cn/mobile/";
-    // 测试不同的json封装
-    private static final String BASE_URL = "http://192.168.0.151:8080";
+        private static final String BASE_URL = "http://apis.juhe.cn/mobile/";
 
     private Api() {
 
