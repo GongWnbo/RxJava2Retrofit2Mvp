@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
 
 /**
  * Created by ${GongWenbo} on 2018/3/19 0019.
@@ -26,14 +25,18 @@ public class ApiClient {
                 .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
                 // TODO: 2018/3/19 0019 如果有抽取
                 // 添加统一的head
-                //                .addInterceptor(new Interceptor() {
-                //                    @Override
-                //                    public Response intercept(Chain chain) throws IOException {
-                //                        Request request = chain.request();
-                //                        Request.Builder builder = request.newBuilder();
-                //                        return chain.proceed(request);
-                //                    }
-                //                })
+//                .addInterceptor(new Interceptor() {
+//                    @Override
+//                    public Response intercept(Chain chain) throws IOException {
+//                        Request request = chain.request();
+//                        HttpUrl url = request.url().newBuilder().build();
+//                        Request build = request.newBuilder().addHeader("head", "head1")
+//                                .url(url)
+//                                .build();
+//                        // TODO: 2018/4/15 这里要注意的是不要调用request,要调用build,不然会导致请求头参数传递失败
+//                        return chain.proceed(build);
+//                    }
+//                })
                 // 添加net日志，便于找bug
                 .addInterceptor(interceptor)
                 // 是否添加断网重连功能

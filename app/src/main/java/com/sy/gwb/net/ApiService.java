@@ -3,22 +3,18 @@ package com.sy.gwb.net;
 
 import com.sy.gwb.entity.BaseResponse;
 import com.sy.gwb.entity.QueryPhoneBean;
-import com.sy.gwb.entity.ReturnResult;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
@@ -31,9 +27,6 @@ public interface ApiService {
 
     @GET("get")
     Observable<BaseResponse<QueryPhoneBean>> login(@Query("phone") String phone, @Query("key") String key);
-
-    @GET("rent")
-    Observable<ReturnResult> rent(@QueryMap HashMap<String, String> hashMap);
 
     // 单文件上传
 //    @Multipart
