@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.sy.gwb.R;
 import com.sy.gwb.entity.BaseResponse;
 import com.sy.gwb.entity.QueryPhoneBean;
-import com.sy.gwb.presenter.RentContract;
-import com.sy.gwb.presenter.RentPresenter;
+import com.sy.gwb.ui.activity.rent.RentContract;
+import com.sy.gwb.ui.activity.rent.RentPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

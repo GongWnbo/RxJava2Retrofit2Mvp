@@ -1,4 +1,4 @@
-package com.sy.gwb.presenter;
+package com.sy.gwb.ui.activity.rent;
 
 import android.support.annotation.NonNull;
 
@@ -15,6 +15,7 @@ import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
@@ -26,11 +27,15 @@ import io.victoralbertos.jolyglot.GsonSpeaker;
 public class RentPresenter implements RentContract.Presenter {
 
     String key = "962af7c970b9fd8f7c487cf9cfa5e1ca";
-    private RentContract.View mView;
-    private CacheProvider     mCacheProvider;
+    private RentContract.View   mView;
+    private CacheProvider       mCacheProvider;
+    private CompositeDisposable mCompositeDisposable;
 
     public RentPresenter(@NonNull RentContract.View view) {
         mView = view;
+        mView.setPresenter(this);
+        mCompositeDisposable = new CompositeDisposable();
+
     }
 
     @Override
@@ -51,7 +56,7 @@ public class RentPresenter implements RentContract.Presenter {
                     @Override
                     public void onFailed(Throwable e, String msg) {
                         super.onFailed(e, msg);
-                        mView.error(msg);
+                        mView.showError(msg);
                     }
                 });
     }
@@ -64,5 +69,20 @@ public class RentPresenter implements RentContract.Presenter {
                     .persistence(file, new GsonSpeaker()).using(CacheProvider.class);
         }
         return mCacheProvider;
+    }
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unSubscribe() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        mView = null;
     }
 }
