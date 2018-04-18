@@ -7,6 +7,7 @@ import com.sy.gwb.entity.QueryPhoneBean;
 import com.sy.gwb.net.Api;
 import com.sy.gwb.net.CacheProvider;
 import com.sy.gwb.net.ProgressObserver;
+import com.sy.gwb.net.RxSchedulersHelper;
 import com.sy.gwb.ui.activity.RentActivity1;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
@@ -43,9 +44,7 @@ public class RentPresenter implements RentContract.Presenter {
         Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login(phone, key);
         CacheProvider cacheProvider = getCacheProvider();
         cacheProvider.login(login)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
                 .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(((RentActivity1) mView))))
                 .subscribe(new ProgressObserver<QueryPhoneBean>(((RentActivity1) mView)) {
                     @Override

@@ -14,12 +14,8 @@ import com.sy.gwb.ui.activity.rent.RentPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RentActivity1 extends AppCompatActivity implements RentContract.View {
+public class RentActivity1 extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-    String key = "962af7c970b9fd8f7c487cf9cfa5e1ca";
-    @BindView(R.id.tv_msg)
-    TextView mTvMsg;
     private RentPresenter mRentPresenter;
 
     @Override
@@ -27,7 +23,7 @@ public class RentActivity1 extends AppCompatActivity implements RentContract.Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent);
         ButterKnife.bind(this);
-        mRentPresenter = new RentPresenter(this);
+//        mRentPresenter = new RentPresenter(this);
     }
 
     public void rent(View view) {
@@ -35,13 +31,4 @@ public class RentActivity1 extends AppCompatActivity implements RentContract.Vie
         mRentPresenter.queryPhone(phone);
     }
 
-    @Override
-    public void showPhoneInfo(BaseResponse<QueryPhoneBean> queryPhoneBean) {
-        mTvMsg.setText(queryPhoneBean.getResult() + "");
-    }
-
-    @Override
-    public void error(String msg) {
-        mTvMsg.setText(msg);
-    }
 }
