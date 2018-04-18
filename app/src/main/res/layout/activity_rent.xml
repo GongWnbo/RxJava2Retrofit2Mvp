@@ -5,12 +5,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.sy.gwb.ui.activity.rent.RentActivity">
+    tools:context="com.sy.gwb.ui.activity.rent.QueryPhoneActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <Button
+        android:id="@+id/btn_query_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="queryPhone"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_show"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
 </LinearLayout>

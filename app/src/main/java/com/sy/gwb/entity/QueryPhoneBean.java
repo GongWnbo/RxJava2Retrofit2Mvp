@@ -22,6 +22,12 @@ public class QueryPhoneBean {
     private String province;
     private String zip;
 
+    @Override
+    public String toString() {
+        return "areacode=" + areacode + ",card=" + card + ",city=" + city + ",company=" + company
+                + ",province=" + province + ",zip=" + zip;
+    }
+
     public String getAreacode() {
         return areacode;
     }
@@ -68,11 +74,5 @@ public class QueryPhoneBean {
 
     public void setZip(String zip) {
         this.zip = zip;
-    }
-
-    @Override
-    public String toString() {
-        return "areacode=" + areacode + ",card=" + card + ",city=" + city + ",company=" + company
-                + ",province=" + province + ",zip=" + zip;
     }
 }

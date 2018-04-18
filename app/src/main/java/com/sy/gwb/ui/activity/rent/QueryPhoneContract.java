@@ -11,18 +11,20 @@ import com.sy.gwb.entity.QueryPhoneBean;
  * Created by ${GongWenbo} on 2018/4/12 0012.
  */
 
-public interface RentContract {
+public interface QueryPhoneContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showPhoneInfo(BaseResponse<QueryPhoneBean> queryPhoneBean);
+        void showPhoneSucceed(BaseResponse<QueryPhoneBean> queryPhoneBean);
 
-        void showError(@NonNull String msg);
+        void showPhoneError(@NonNull String msg);
 
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
+
         void queryPhone(String phone);
+
     }
 
 }

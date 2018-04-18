@@ -18,7 +18,7 @@ import io.rx_cache2.ProviderKey;
 public interface CacheProvider {
     int TIME = 7;
 
-    @Expirable(false)   //false表示内存不足系统回收时永远不回收
+//    @Expirable(false)   //false表示内存不足系统回收时永远不回收
     @LifeCache(duration = TIME, timeUnit = TimeUnit.DAYS)  //缓存时间
     Observable<BaseResponse<QueryPhoneBean>> login(Observable<BaseResponse<QueryPhoneBean>> login);
 
