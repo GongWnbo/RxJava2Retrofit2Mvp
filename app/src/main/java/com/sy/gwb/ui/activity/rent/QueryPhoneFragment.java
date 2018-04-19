@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.sy.gwb.BaseFragment;
 import com.sy.gwb.R;
 import com.sy.gwb.entity.BaseResponse;
-import com.sy.gwb.entity.QueryPhoneBean;
+import com.sy.gwb.entity.QueryPhoneBean1;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,7 +44,7 @@ public class QueryPhoneFragment extends BaseFragment implements QueryPhoneContra
     }
 
     @Override
-    public void showPhoneSucceed(BaseResponse<QueryPhoneBean> queryPhoneBean) {
+    public void showPhoneSucceed(BaseResponse<QueryPhoneBean1> queryPhoneBean) {
         mTvPhone.setText(queryPhoneBean.getResult().toString());
     }
 

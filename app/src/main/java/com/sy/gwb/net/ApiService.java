@@ -2,7 +2,7 @@ package com.sy.gwb.net;
 
 
 import com.sy.gwb.entity.BaseResponse;
-import com.sy.gwb.entity.QueryPhoneBean;
+import com.sy.gwb.entity.QueryPhoneBean1;
 
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public interface ApiService {
     // http://apis.juhe.cn/mobile/get?phone=13429667914&key=您申请的KEY
 
     @GET("get")
-    Observable<BaseResponse<QueryPhoneBean>> login(@Query("phone") String phone, @Query("key") String key);
+    Observable<BaseResponse<QueryPhoneBean1>> login(@Query("phone") String phone, @Query("key") String key);
 
     // 单文件上传
 //    @Multipart

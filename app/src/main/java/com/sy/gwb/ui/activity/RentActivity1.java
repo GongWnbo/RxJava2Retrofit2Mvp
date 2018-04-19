@@ -1,12 +1,11 @@
 package com.sy.gwb.ui.activity;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.sy.gwb.BaseActivity;
 import com.sy.gwb.R;
 import com.sy.gwb.entity.BaseResponse;
-import com.sy.gwb.entity.QueryPhoneBean;
+import com.sy.gwb.entity.QueryPhoneBean1;
 import com.sy.gwb.net.Api;
 import com.sy.gwb.net.CacheProvider;
 import com.sy.gwb.net.ProgressObserver;
@@ -17,7 +16,6 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -48,12 +46,12 @@ public class RentActivity1 extends BaseActivity {
 
     @OnClick(R.id.btn_query_phone)
     public void onViewClicked() {
-        Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login("13858477182", key);
+        Observable<BaseResponse<QueryPhoneBean1>> login = Api.getInstance().login("13858477182", key);
         CacheProvider cacheProvider = getCacheProvider();
         cacheProvider.login(login)
-                .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
-                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new ProgressObserver<QueryPhoneBean>(this) {
+                .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean1>>io_main())
+                .as(AutoDispose.<BaseResponse<QueryPhoneBean1>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
+                .subscribe(new ProgressObserver<QueryPhoneBean1>(this) {
                     @Override
                     public void onSubscribe(Disposable d) {
                         super.onSubscribe(d);
@@ -61,7 +59,7 @@ public class RentActivity1 extends BaseActivity {
                     }
 
                     @Override
-                    protected void onSucceed(BaseResponse<QueryPhoneBean> baseResponse) {
+                    protected void onSucceed(BaseResponse<QueryPhoneBean1> baseResponse) {
                         mTv.setText(baseResponse.getResult().toString());
                     }
 
@@ -77,6 +75,7 @@ public class RentActivity1 extends BaseActivity {
         File file = getCacheDir();
         if (mCacheProvider == null) {
             mCacheProvider = new RxCache.Builder()
+                    .useExpiredDataIfLoaderNotAvailable(true)
                     .persistence(file, new GsonSpeaker())
                     .using(CacheProvider.class);
         }
