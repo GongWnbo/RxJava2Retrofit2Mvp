@@ -4,7 +4,7 @@ package com.sy.gwb.entity;
  * Created by ${GongWenbo} on 2018/3/19 0019.
  */
 
-public class QueryPhoneBean1 {
+public class QueryPhoneBean {
 
     /**
      * areacode : 0571
