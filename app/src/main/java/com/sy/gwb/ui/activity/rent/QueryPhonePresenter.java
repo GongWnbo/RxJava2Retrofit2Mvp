@@ -1,6 +1,6 @@
 package com.sy.gwb.ui.activity.rent;
 
-import android.arch.lifecycle.LifecycleOwner;
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -8,10 +8,8 @@ import com.sy.gwb.entity.BaseResponse;
 import com.sy.gwb.entity.QueryPhoneBean;
 import com.sy.gwb.net.Api;
 import com.sy.gwb.net.CacheProvider;
-import com.sy.gwb.net.ProgressObserver;
+import com.sy.gwb.net.ProgressSubscriber;
 import com.sy.gwb.net.RxSchedulersHelper;
-import com.uber.autodispose.AutoDispose;
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.io.File;
 
@@ -31,12 +29,12 @@ public class QueryPhonePresenter implements QueryPhoneContract.Presenter {
     private QueryPhoneContract.View mView;
     private CacheProvider           mCacheProvider;
     private CompositeDisposable     mCompositeDisposable;
-    private Context mContext;
+    private Activity                mActivity;
 
-    public QueryPhonePresenter(@NonNull QueryPhoneContract.View view, Context context) {
+    public QueryPhonePresenter(@NonNull QueryPhoneContract.View view, Activity activity) {
         mView = view;
         mView.setPresenter(this);
-        mContext = context;
+        mActivity = activity;
         mCompositeDisposable = new CompositeDisposable();
     }
 
@@ -46,11 +44,10 @@ public class QueryPhonePresenter implements QueryPhoneContract.Presenter {
         CacheProvider cacheProvider = getCacheProvider();
         cacheProvider.login(login)
                 .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
-//                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(((QueryPhoneFragment) mView))))
-                .subscribe(new ProgressObserver<QueryPhoneBean>(mContext) {
+                //                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(((QueryPhoneFragment) mView))))
+                .subscribe(new ProgressSubscriber<QueryPhoneBean>(mActivity) {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        super.onSubscribe(d);
                         mCompositeDisposable.add(d);
                     }
 
@@ -68,7 +65,7 @@ public class QueryPhonePresenter implements QueryPhoneContract.Presenter {
     }
 
     public CacheProvider getCacheProvider() {
-        File file = mContext.getCacheDir();
+        File file = mActivity.getCacheDir();
         if (mCacheProvider == null) {
             mCacheProvider = new RxCache.Builder()
                     .persistence(file, new GsonSpeaker())

@@ -1,6 +1,5 @@
 package com.sy.gwb.ui.activity;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.sy.gwb.BaseActivity;
@@ -9,7 +8,7 @@ import com.sy.gwb.entity.BaseResponse;
 import com.sy.gwb.entity.QueryPhoneBean;
 import com.sy.gwb.net.Api;
 import com.sy.gwb.net.CacheProvider;
-import com.sy.gwb.net.ProgressObserver;
+import com.sy.gwb.net.ProgressSubscriber;
 import com.sy.gwb.net.RxSchedulersHelper;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
@@ -17,7 +16,6 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -49,14 +47,13 @@ public class RentActivity1 extends BaseActivity {
     @OnClick(R.id.btn_query_phone)
     public void onViewClicked() {
         Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login("13858477182", key);
-        CacheProvider cacheProvider = getCacheProvider();
-        cacheProvider.login(login)
+//        CacheProvider cacheProvider = getCacheProvider();
+        login
                 .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
                 .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new ProgressObserver<QueryPhoneBean>(this) {
+                .subscribe(new ProgressSubscriber<QueryPhoneBean>(this) {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        super.onSubscribe(d);
 
                     }
 
@@ -64,17 +61,12 @@ public class RentActivity1 extends BaseActivity {
                     protected void onSucceed(BaseResponse<QueryPhoneBean> baseResponse) {
                         mTv.setText(baseResponse.getResult().toString());
                     }
-
-                    @Override
-                    public void onFailed(Throwable e, String msg) {
-                        super.onFailed(e, msg);
-
-                    }
                 });
     }
 
     public CacheProvider getCacheProvider() {
-        File file = getCacheDir();
+        //        File file = getCacheDir();
+        File file = new File(System.getProperty("user.home"), "Desktop");
         if (mCacheProvider == null) {
             mCacheProvider = new RxCache.Builder()
                     .persistence(file, new GsonSpeaker())
