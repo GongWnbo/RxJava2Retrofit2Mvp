@@ -1,6 +1,7 @@
 package com.sy.gwb;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -18,10 +19,17 @@ import io.victoralbertos.jolyglot.GsonSpeaker;
 public class App extends Application {
 
     private static CacheProvider mCacheProvider;
+    private static  Context sContext;
+
+
+    public static Context getApplication() {
+        return sContext;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sContext = this;
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
