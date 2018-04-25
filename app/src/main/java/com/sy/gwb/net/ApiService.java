@@ -26,7 +26,7 @@ public interface ApiService {
     // http://apis.juhe.cn/mobile/get?phone=13429667914&key=您申请的KEY
 
     @GET("get")
-    Observable<BaseResponse<QueryPhoneBean>> login(@Query("phone") String phone, @Query("key") String key);
+    Observable<QueryPhoneBean> login(@Query("phone") String phone, @Query("key") String key);
 
     // 单文件上传
 //    @Multipart

@@ -40,28 +40,28 @@ public class QueryPhonePresenter implements QueryPhoneContract.Presenter {
 
     @Override
     public void queryPhone(String phone) {
-        Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login(phone, key);
-        CacheProvider cacheProvider = getCacheProvider();
-        cacheProvider.login(login)
-                .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
-                //                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(((QueryPhoneFragment) mView))))
-                .subscribe(new ProgressSubscriber<QueryPhoneBean>(mActivity) {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mCompositeDisposable.add(d);
-                    }
-
-                    @Override
-                    protected void onSucceed(BaseResponse<QueryPhoneBean> baseResponse) {
-                        mView.showPhoneSucceed(baseResponse);
-                    }
-
-                    @Override
-                    public void onFailed(Throwable e, String msg) {
-                        super.onFailed(e, msg);
-                        mView.showPhoneError(msg);
-                    }
-                });
+//        Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login(phone, key);
+//        CacheProvider cacheProvider = getCacheProvider();
+//        cacheProvider.login(login)
+//                .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
+//                //                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(((QueryPhoneFragment) mView))))
+//                .subscribe(new ProgressSubscriber<QueryPhoneBean>(mActivity) {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        mCompositeDisposable.add(d);
+//                    }
+//
+//                    @Override
+//                    protected void onSucceed(BaseResponse<QueryPhoneBean> baseResponse) {
+//                        mView.showPhoneSucceed(baseResponse);
+//                    }
+//
+//                    @Override
+//                    public void onFailed(Throwable e, String msg) {
+//                        super.onFailed(e, msg);
+//                        mView.showPhoneError(msg);
+//                    }
+//                });
     }
 
     public CacheProvider getCacheProvider() {

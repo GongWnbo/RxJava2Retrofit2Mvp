@@ -2,6 +2,7 @@ package com.sy.gwb.ui.activity;
 
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.sy.gwb.BaseActivity;
 import com.sy.gwb.R;
 import com.sy.gwb.entity.BaseResponse;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
 
@@ -46,27 +48,21 @@ public class RentActivity1 extends BaseActivity {
 
     @OnClick(R.id.btn_query_phone)
     public void onViewClicked() {
-        Observable<BaseResponse<QueryPhoneBean>> login = Api.getInstance().login("13858477182", key);
-//        CacheProvider cacheProvider = getCacheProvider();
-        login
-                .compose(RxSchedulersHelper.<BaseResponse<QueryPhoneBean>>io_main())
-                .as(AutoDispose.<BaseResponse<QueryPhoneBean>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new ProgressSubscriber<QueryPhoneBean>(this) {
+        Observable<QueryPhoneBean> login = Api.getInstance().login("13858477182", key);
+        CacheProvider cacheProvider = getCacheProvider();
+        cacheProvider.login(login)
+                .compose(RxSchedulersHelper.<QueryPhoneBean>io_main())
+                .subscribe(new Consumer<QueryPhoneBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    protected void onSucceed(BaseResponse<QueryPhoneBean> baseResponse) {
-                        mTv.setText(baseResponse.getResult().toString());
+                    public void accept(QueryPhoneBean queryPhoneBean) throws Exception {
+                        QueryPhoneBean.ResultBean result = queryPhoneBean.getResult();
+                        mTv.setText(result.getCity());
                     }
                 });
     }
 
     public CacheProvider getCacheProvider() {
-        //        File file = getCacheDir();
-        File file = new File(System.getProperty("user.home"), "Desktop");
+        File file = getCacheDir();
         if (mCacheProvider == null) {
             mCacheProvider = new RxCache.Builder()
                     .persistence(file, new GsonSpeaker())
